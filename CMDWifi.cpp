@@ -18,8 +18,7 @@
 #include "CMDWifi.h"
 #include "string.h"
 
-CMDWifi::CMDWifi()
-{
+CMDWifi::CMDWifi() {
   status = WL_IDLE_STATUS;
 
   //Configure pins for Adafruit ATWINC1500 Breakout
@@ -64,12 +63,14 @@ void CMDWifi::connect(char * ssid, char * pass)
   printWiFiStatus();
 }
 
-String CMDWifi::read(){
+String CMDWifi::read() {
   // if there's incoming data from the net connection.
   // send it out the serial port.  This is for debugging
   // purposes only:
   String str = "";
 
+  // if there is a message waiting from the server
+  // apppend it to str
   while (client.available()) {
     char c = client.read();
     str += c;
@@ -81,7 +82,8 @@ String CMDWifi::read(){
     httpRequest();
   }
 
-  return str;
+  // trim str to just the content and return it
+  return grabContent(str);
 }
 
 void CMDWifi::httpRequest() {
@@ -108,6 +110,13 @@ void CMDWifi::httpRequest() {
     // if you couldn't make a connection:
     Serial.println("connection failed");
   }
+}
+
+String CMDWifi::grabContent(String response) {
+  // find the first blank line
+  int endOfHeader = response.indexOf("\r\n\r\n");
+  // return everything after that
+  return response.substring(endOfHeader + 4);
 }
 
 void CMDWifi::printWiFiStatus() {

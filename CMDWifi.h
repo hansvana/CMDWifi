@@ -18,19 +18,19 @@
 #include <SPI.h>
 #include <WiFi101.h>
 
-class CMDWifi
-{
+class CMDWifi {
 	public:
-		CMDWifi();
-		void connect(char * ssid, char * pass);
+    CMDWifi();
+    void connect(char * ssid, char * pass);
     String read();
 
 	private:
     void printWiFiStatus();
     void httpRequest();
+    String grabContent(String response);
 
-		int status;
-		WiFiClient client;
+    int status;
+    WiFiClient client;
     unsigned long lastConnectionTime;
     const unsigned long postingInterval = 3L * 1000L;
 };
