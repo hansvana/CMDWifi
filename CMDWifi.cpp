@@ -25,7 +25,7 @@ CMDWifi::CMDWifi() {
   WiFi.setPins(8,7,4);
 }
 
-void CMDWifi::connect(char * ssid, char * pass)
+void CMDWifi::connect(char * ssid, char * pass, char * server, int port = 80)
 {
 	//Initialize serial and wait for port to open:
   Serial.begin(9600);
@@ -33,8 +33,8 @@ void CMDWifi::connect(char * ssid, char * pass)
     ; // wait for serial port to connect. Needed for native USB port only
   }
 
-	if (ssid == 0) {
-		Serial.println("SSID not set");
+	if (ssid == 0 || server == 0) {
+		Serial.println("SSID or server not set");
     while (true);
 	}
   // check for the presence of the shield:
@@ -42,6 +42,9 @@ void CMDWifi::connect(char * ssid, char * pass)
     Serial.println("WiFi shield not present");
     while (true);
   }
+
+  hosturl = "cmd.camp";
+  hostport = port;
 
   // attempt to connect to WiFi network:
   while ( status != WL_CONNECTED) {
@@ -56,17 +59,15 @@ void CMDWifi::connect(char * ssid, char * pass)
     }
 
 
-    // wait 10 seconds for connection:
+    // wait 5 seconds for connection:
     delay(5000);
   }
   // you're connected now, so print out the status:
   printWiFiStatus();
 }
 
-String CMDWifi::read() {
-  // if there's incoming data from the net connection.
-  // send it out the serial port.  This is for debugging
-  // purposes only:
+String CMDWifi::read(String urlPars) {
+
   String str = "";
 
   // if there is a message waiting from the server
@@ -79,26 +80,29 @@ String CMDWifi::read() {
   // if three seconds have passed since your last connection,
   // then connect again and send data:
   if (millis() - lastConnectionTime > postingInterval) {
-    httpRequest();
+    httpRequest(urlPars);
   }
 
   // trim str to just the content and return it
   return grabContent(str);
 }
 
-void CMDWifi::httpRequest() {
+void CMDWifi::httpRequest(String urlPars) {
   // close any connection before send a new request.
   // This will free the socket on the WiFi shield
   client.stop();
 
   // if there's a successful connection:
-  if (client.connect("cmd.camp", 12345)) {
+  if (client.connect(hosturl.c_str(), hostport)) {
     Serial.println("connecting...");
     // send the HTTP PUT request:
     client.print("GET ");
-    client.print("/get/12345");
+    client.print(urlPars);
     client.println(" HTTP/1.1");
-    client.println("Host: cmd.camp:12345");
+    client.print("Host: ");
+    client.print(hosturl);
+    client.print(":");
+    client.println(hostport);
     client.println("User-Agent: ArduinoWiFi/1.1");
     client.println("Connection: close");
     client.println();

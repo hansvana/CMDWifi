@@ -21,18 +21,21 @@
 class CMDWifi {
 	public:
     CMDWifi();
-    void connect(char * ssid, char * pass);
-    String read();
+    void connect(char * ssid, char * pass, char * server, int port);
+    String read(String urlPars);
 
 	private:
     void printWiFiStatus();
-    void httpRequest();
+    void httpRequest(String urlPars);
     String grabContent(String response);
 
     int status;
     WiFiClient client;
-    unsigned long lastConnectionTime;
+		String hosturl;
+		int hostport;
+		unsigned long lastConnectionTime;
     const unsigned long postingInterval = 3L * 1000L;
+
 };
 
 #endif
