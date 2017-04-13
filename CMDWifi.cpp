@@ -77,7 +77,7 @@ char* CMDWifi::read() {
     httpRequest(urlPars);
   }
 
-  char buffer[12] = "";
+  char buffer[50] = "";
   int recording = 0;
   int i = 0;
   // if there is a message waiting from the server

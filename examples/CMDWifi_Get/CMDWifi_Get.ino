@@ -7,7 +7,7 @@ char ssid[] = "MyWifi"; // your network SSID (name)
 char pass[] = "secret"; // your network password, leave empty "" for no password
 char server[] = "arduino.cc"; // the url of the webserver to connect to
 int port = 80; // the port on the webserver (80 is default)
-String getKey = "/get/xxxxxxxx"; // the key you want to read from the server
+char getKey[] = "xxxxxxxx"; // the key you want to read from the server
 
 void setup() {
   // Don't forget to set OUTPUT or INPUT on the right ports
