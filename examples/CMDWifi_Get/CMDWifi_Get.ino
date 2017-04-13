@@ -30,7 +30,7 @@ void loop() {
     // right now the response is a string, but we want to use it
     // as a number (integer), so we convert it with toInt. The resulting
     // number is stored in responseInt.
-    int responseInt = response.toInt();
+    int responseInt = atoi(response);
 
     // write the integer
     analogWrite(3, responseInt);
