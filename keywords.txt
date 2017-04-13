@@ -1,0 +1,9 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+CMDWifi	KEYWORD1
+
+send    KEYWORD2
+get     KEYWORD2
+sendGet KEYWORD2
