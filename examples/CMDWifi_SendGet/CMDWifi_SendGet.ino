@@ -29,6 +29,9 @@ void loop() {
   // only do this part if there is a response from the server
   if (response != ""){
     // print the response (for debugging purposes only)
+    Serial.print("Sensor (send): ");
+    Serial.print(sensorValue);
+    Serial.print("\tOntvangen (get): ");
     Serial.println(response);
 
     // right now the response is a string, but we want to use it
