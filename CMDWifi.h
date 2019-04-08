@@ -22,12 +22,12 @@ class CMDWifi {
 	public:
     CMDWifi();
     void connect(char* ssid, char* pass, char* server, int port);
-		char* sendGet(char* sendKey, int value, char* getKey);
-		char* send(char* sendKey, int value);
-		char* get(char* getKey);
+		int sendGet(char* sendKey, int value, char* getKey);
+		int send(char* sendKey, int value);
+		int get(char* getKey);
 
 	private:
-		char* read();
+		int read();
     void printWiFiStatus();
     void httpRequest(char* urlPars);
     char* grabContent(char* response);

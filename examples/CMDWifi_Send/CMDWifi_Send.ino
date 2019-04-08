@@ -22,7 +22,7 @@ void loop() {
   int sensorValue = analogRead(A0);
 
   // connect to the server, send the sensorValue to the sendKey
-  char* response = wifi.send(sendKey, sensorValue);
+  int response = wifi.send(sendKey, sensorValue);
 
   // only do this part if there is a response from the server
   if (response != ""){

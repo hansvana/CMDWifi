@@ -20,20 +20,15 @@ void setup() {
 
 void loop() {
   // connect to the server, read from the getKey
-  char* response = wifi.get(getKey);
+  int response = wifi.get(getKey);
 
-  // only do this part if there is a response from the server
+  // only do this part if the response is between 0 and 255
   if (response != ""){
     // print the response (for debugging purposes only)
     Serial.println(response);
 
-    // right now the response is a string, but we want to use it
-    // as a number (integer), so we convert it with toInt. The resulting
-    // number is stored in responseInt.
-    int responseInt = atoi(response);
-
     // write the integer
-    analogWrite(3, responseInt);
+    analogWrite(3, response);
   }
 
   // wait for a short time

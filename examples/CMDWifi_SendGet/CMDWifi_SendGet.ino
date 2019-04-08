@@ -24,7 +24,7 @@ void loop() {
 
   // connect to the server, send the sensorValue to the sendKey
   // and read from the getKey. Here be magic.
-  char* response = wifi.sendGet(sendKey, sensorValue, getKey);
+  int response = wifi.sendGet(sendKey, sensorValue, getKey);
 
   // only do this part if there is a response from the server
   if (response != ""){
@@ -34,13 +34,8 @@ void loop() {
     Serial.print("\tOntvangen (get): ");
     Serial.println(response);
 
-    // right now the response is a string, but we want to use it
-    // as a number (integer), so we convert it with atoi(). The resulting
-    // number is stored in responseInt.
-    int responseInt = atoi(response);
-
-    // do something with responseInt
-    if (responseInt == 1) {
+    // do something with response
+    if (response == 1) {
       digitalWrite(3, HIGH);
     } else {
       digitalWrite(3, LOW);

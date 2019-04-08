@@ -65,11 +65,11 @@ void CMDWifi::connect(char * ssid, char * pass, char * server, int port = 80)
   printWiFiStatus();
 }
 
-char* CMDWifi::sendGet(char* sendKey, int value, char* getKey) { sprintf(urlPars, "/send/%s/%i/get/%s", sendKey, value, getKey); return read();};
-char* CMDWifi::send(char* sendKey, int value) { sprintf(urlPars, "/send/%s/%i", sendKey, value); return read();};
-char* CMDWifi::get(char* getKey) { sprintf(urlPars, "/get/%s", getKey); return read();};
+int CMDWifi::sendGet(char* sendKey, int value, char* getKey) { sprintf(urlPars, "/send/%s/%i/get/%s", sendKey, value, getKey); return read();};
+int CMDWifi::send(char* sendKey, int value) { sprintf(urlPars, "/send/%s/%i", sendKey, value); return read();};
+int CMDWifi::get(char* getKey) { sprintf(urlPars, "/get/%s", getKey); return read();};
 
-char* CMDWifi::read() {
+int CMDWifi::read() {
 
   // if three seconds have passed since your last connection,
   // then connect again and send data:
@@ -96,7 +96,7 @@ char* CMDWifi::read() {
 
   if (buffer[0] != '\0') {
     buffer[i++] = '\0'; // append \0 to terminate string
-    return buffer;
+    return atoi(buffer); // return buffer as an integer
   }
   else
     return "";
