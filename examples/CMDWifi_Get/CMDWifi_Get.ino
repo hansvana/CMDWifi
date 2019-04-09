@@ -22,8 +22,8 @@ void loop() {
   // connect to the server, read from the getKey
   int response = wifi.get(getKey);
 
-  // only do this part if the response is between 0 and 255
-  if (response != ""){
+  // only do this part if the response is a real number
+  if (response >= 0){
     // print the response (for debugging purposes only)
     Serial.println(response);
 
