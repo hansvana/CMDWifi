@@ -25,7 +25,7 @@ void loop() {
   int response = wifi.send(sendKey, sensorValue);
 
   // only do this part if there is a response from the server
-  if (response != ""){
+  if (response != -1){
     // print the response (for debugging purposes only)
     Serial.println(response);
   }

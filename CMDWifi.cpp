@@ -99,7 +99,7 @@ int CMDWifi::read() {
     return atoi(buffer); // return buffer as an integer
   }
   else
-    return "";
+    return -1;
 }
 
 void CMDWifi::httpRequest(char* urlPars) {

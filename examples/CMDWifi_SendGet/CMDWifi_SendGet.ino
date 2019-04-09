@@ -26,8 +26,8 @@ void loop() {
   // and read from the getKey. Here be magic.
   int response = wifi.sendGet(sendKey, sensorValue, getKey);
 
-  // only do this part if there is a response from the server
-  if (response != ""){
+  // only do this part if the response is a real number
+  if (response >= 0) {
     // print the response (for debugging purposes only)
     Serial.print("Sensor (send): ");
     Serial.print(sensorValue);
@@ -40,7 +40,6 @@ void loop() {
     } else {
       digitalWrite(3, LOW);
     }
-
   }
 
   // wait for a short time
