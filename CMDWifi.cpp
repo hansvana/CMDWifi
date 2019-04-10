@@ -42,7 +42,7 @@ void CMDWifi::connect(char * ssid, char * pass, char * server, int port = 80)
     while (true);
   }
 
-  hosturl = "cmd.camp";
+  hosturl = server;
   hostport = port;
 
   // attempt to connect to WiFi network:
@@ -56,7 +56,6 @@ void CMDWifi::connect(char * ssid, char * pass, char * server, int port = 80)
       // Connect to WPA/WPA2 network.
       status = WiFi.begin(ssid, pass);
     }
-
 
     // wait 5 seconds for connection:
     delay(5000);
@@ -94,7 +93,7 @@ int CMDWifi::read() {
       buffer[i++] = c;
   }
 
-  if (buffer[0] != '\0') {
+  if (buffer[0] != '\0') { // if buffer is not empty
     buffer[i++] = '\0'; // append \0 to terminate string
     return atoi(buffer); // return buffer as an integer
   }
