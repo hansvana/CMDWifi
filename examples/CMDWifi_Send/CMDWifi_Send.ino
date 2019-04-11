@@ -27,7 +27,9 @@ void loop() {
   // only do this part if there is a response from the server
   if (response != -1){
     // print the response (for debugging purposes only)
-    Serial.println(response);
+    Serial.print(response);
+    Serial.print(" toegevoegd aan ");
+    Serial.println(sendKey);
   }
 
   // wait for a short time
