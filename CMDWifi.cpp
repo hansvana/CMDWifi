@@ -1,5 +1,5 @@
 /*
-  CMDWifi.cpp - Wrapper for the Wifi101 library
+  CMDWifi.cpp - Wrapper for the WiFiNINA library
   Based on the Repeating Wifi Web Client example
 
   Created 23 April 2012, modified 31 May 2012
@@ -8,20 +8,20 @@
 	by Federico Vanzati
   CMDWifi wrapper created 4 April 2017
 	by Hans van Arken
+  Modified 12 Febuary 2023
+	by Michael Tjia
 
   Released into the public domain.
 */
 
 #include "Arduino.h"
 #include <SPI.h>
-#include <WiFi101.h>
+#include <WiFiNINA.h>
 #include "CMDWifi.h"
 
 CMDWifi::CMDWifi() {
   status = WL_IDLE_STATUS;
 
-  //Configure pins for Adafruit ATWINC1500 Breakout
-  WiFi.setPins(8,7,4);
 }
 
 void CMDWifi::connect(char * ssid, char * pass, char * server, int port = 80)
@@ -36,9 +36,9 @@ void CMDWifi::connect(char * ssid, char * pass, char * server, int port = 80)
 		Serial.println("SSID or server not set");
     while (true);
 	}
-  // check for the presence of the shield:
-  if (WiFi.status() == WL_NO_SHIELD) {
-    Serial.println("WiFi shield not present");
+  // check for the presence of the module:
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("WiFi module not present");
     while (true);
   }
 

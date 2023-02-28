@@ -1,5 +1,5 @@
 /*
-  CMDWifi.h - Wrapper for the Wifi101 library
+  CMDWifi.h - Wrapper for the WiFiNINA library
   Based on the Repeating Wifi Web Client example
 
   Created 23 April 2012, modified 31 May 2012
@@ -8,6 +8,8 @@
 	by Federico Vanzati
   CMDWifi wrapper created 4 April 2017
 	by Hans van Arken
+  Modified 12 Febuary 2023
+	by Michael Tjia
 
   Released into the public domain.
 */
@@ -16,7 +18,7 @@
 
 #include "Arduino.h"
 #include <SPI.h>
-#include <WiFi101.h>
+#include <WiFiNINA.h>
 
 class CMDWifi {
 	public:
